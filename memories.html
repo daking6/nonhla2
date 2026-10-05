@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Our Memories</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d8b4fe, #8b5cf6, #4c1d95);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      transition: opacity 0.5s ease;
+      position: relative;
+    }
+
+    h1 {
+      margin-top: 60px;
+      color: #f0abfc;
+      font-size: 3rem;
+      font-family: 'Brush Script MT', cursive;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      position: relative;
+      z-index: 5;
+    }
+
+    /* PASSWORD */
+
+    #password-section {
+      margin-top: 50px;
+      position: relative;
+      z-index: 10;
+    }
+
+    #password {
+      font-size: 1.3rem;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+      max-width: 90%;
+    }
+
+    #password-section label {
+      color: white;
+      font-size: 16px;
+    }
+
+    /* BUTTON */
+
+    .btn-back {
+      margin: 30px;
+      padding: 12px 25px;
+      background: linear-gradient(to right, #c026d3, #7c3aed);
+      color: white;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s;
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn-back:hover {
+      transform: scale(1.05);
+      background: linear-gradient(to right, #d946ef, #8b5cf6);
+    }
+
+    /* GALLERY */
+
+    .gallery {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: relative;
+      z-index: 5;
+    }
+
+    .gallery img,
+    .gallery video {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+      display: block;
+    }
+
+    .gallery img:hover,
+    .gallery video:hover {
+      transform: scale(1.05);
+    }
+
+    /* MUSIC */
+
+    .music-section {
+      margin: 50px auto;
+      padding: 20px;
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .music-section h2 {
+      color: #f0abfc;
+      font-size: 2rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .apple-music-btn {
+      display: inline-block;
+      padding: 14px 25px;
+      background: #000;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s;
+      margin-bottom: 25px;
+    }
+
+    .apple-music-btn:hover {
+      transform: scale(1.05);
+      background: #333;
+    }
+
+    .songs-section {
+      margin-top: 25px;
+    }
+
+    .song {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 15px;
+      margin: 15px auto;
+      border-radius: 15px;
+      max-width: 450px;
+      box-shadow: 0 5px 15px rgba(45, 20, 80, 0.2);
+    }
+
+    .song h3 {
+      color: #7e22ce;
+      margin-top: 0;
+    }
+
+    .song audio {
+      width: 100%;
+      display: block;
+    }
+
+    /* FLOATING HEARTS AND BEARS */
+
+    .floating-heart,
+    .floating-bear {
+      position: fixed;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      left: 0;
+    }
+
+    .floating-heart {
+      font-size: 2rem;
+      color: #e879f9;
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .floating-bear {
+      font-size: 3rem;
+      animation: floatBear 8s linear infinite;
+      opacity: 0.5;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translateY(-120px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatBear {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.5;
+      }
+
+      100% {
+        transform: translateY(-120px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .gallery {
+        padding: 20px 10px;
+        gap: 15px;
+      }
+
+      .gallery img,
+      .gallery video {
+        max-width: 45%;
+      }
+
+      .music-section {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Pieces of us ❤️</h1>
+
+
+  <!-- PASSWORD -->
+
+  <div id="password-section">
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter Password"
+    >
+
+    <br><br>
+
+    <label>
+      <input type="checkbox" id="show-password">
+      Show Password
+    </label>
+
+    <br><br>
+
+    <button class="btn-back" onclick="checkPassword()">
+      Enter
+    </button>
+
+  </div>
+
+
+  <!-- MEMORY GALLERY -->
+
+  <div class="gallery" id="memoryGallery">
+
+    <!-- IMAGE 1 -->
+    <img src="image/memory 1.jpeg" alt="Memory 1">
+
+    <!-- IMAGE 2 -->
+    <img src="image/memory 2.png" alt="Memory 2">
+
+    <!-- IMAGE 3 -->
+    <img src="image/memory 3.jpeg" alt="Memory 3">
+
+    <!-- IMAGE 4 -->
+    <img src="image/memory 4.jpeg" alt="Memory 4">
+
+    <!-- IMAGE 5 -->
+    <img src="image/memory 5.png" alt="Memory 5">
+
+    <!-- IMAGE 6 -->
+    <img src="image/memory 6.png" alt="Memory 6">
+
+    <!-- IMAGE 7 -->
+    <img src="image/memory 7.png" alt="Memory 7">
+
+    <!-- IMAGE 8 -->
+    <img src="image/memory 8.png" alt="Memory 8">
+
+    <!-- IMAGE 9 -->
+    <img src="image/memory 9.png" alt="Memory 9">
+
+    <!-- IMAGE 10 -->
+    <img src="image/memory 10.png" alt="Memory 10">
+
+    <!-- IMAGE 11 -->
+    <img src="image/memory 11.png" alt="Memory 11">
+
+    <!-- IMAGE 12 -->
+    <img src="image/memory 12.jpeg" alt="Memory 12">
+
+    <!-- IMAGE 13 -->
+    <img src="image/memory 13.png" alt="Memory 13">
+
+    <!-- IMAGE 14 -->
+    <img src="image/memory 14.png" alt="Memory 14">
+
+    <!-- IMAGE 15 -->
+    <img src="image/memory 15.png" alt="Memory 15">
+
+    <!-- IMAGE 16 -->
+    <img src="image/memory 16.png" alt="Memory 16">
+
+    <!-- IMAGE 17 -->
+    <img src="image/memory 17.png" alt="Memory 17">
+
+    <!-- IMAGE 18 -->
+    <img src="image/memory 18.png" alt="Memory 18">
+
+    <!-- IMAGE 19 -->
+    <img src="image/memory 19.png" alt="Memory 19">
+
+    <!-- IMAGE 20 -->
+    <img src="image/memory 20.png" alt="Memory 20">
+
+
+    <!-- ONE VIDEO -->
+
+    <video width="250" controls>
+      <source src="image/memory video.mp4" type="video/mp4">
+      Your browser does not support video.
+    </video>
+
+  </div>
+
+
+  <!-- BACK BUTTON -->
+
+  <button class="btn-back" onclick="goBackWithFade()">
+    Back
+  </button>
+
+
+  <!-- FLOATING HEARTS -->
+
+  <div class="floating-heart"
+       style="left: 10%; animation-delay: 0s;">
+    ❤️
+  </div>
+
+  <div class="floating-heart"
+       style="left: 30%; animation-delay: 2s;">
+    ❤️
+  </div>
+
+  <div class="floating-heart"
+       style="left: 50%; animation-delay: 4s;">
+    ❤️
+  </div>
+
+  <div class="floating-heart"
+       style="left: 70%; animation-delay: 1s;">
+    ❤️
+  </div>
+
+  <div class="floating-heart"
+       style="left: 90%; animation-delay: 3s;">
+    ❤️
+  </div>
+
+
+  <!-- FLOATING BEARS -->
+
+  <div class="floating-bear"
+       style="left: 20%; animation-delay: 0s;">
+    🧸
+  </div>
+
+  <div class="floating-bear"
+       style="left: 60%; animation-delay: 3s;">
+    🧸
+  </div>
+
+  <div class="floating-bear"
+       style="left: 80%; animation-delay: 5s;">
+    🧸
+  </div>
+
+
+  <!-- MUSIC -->
+
+  <div class="music-section">
+
+    <h2>🎶 Our Little Soundtrack ❤️</h2>
+
+    <a
+      href="https://music.apple.com/au/playlist/us/pl.u-mJy88M0FNL421Rp"
+      target="_blank"
+      class="apple-music-btn"
+    >
+      🎵 Open Our Playlist ❤️
+    </a>
+
+
+    <div class="songs-section">
+
+      <h2>🎵 Songs For You ❤️</h2>
+
+
+      <!-- SONG ONE -->
+
+      <div class="song">
+
+        <h3>Song One ❤️</h3>
+
+        <audio controls preload="metadata">
+
+          <source
+            src="song/Q-Mark & TpZee - Paris (feat.  Afriikan Papi) [Official Music Video] - (320 Kbps) (1).mp3"
+            type="audio/mpeg"
+          >
+
+          Your browser does not support audio.
+
+        </audio>
+
+      </div>
+
+
+      <!-- SONG TWO -->
+
+      <div class="song">
+
+        <h3>Song Two 💜</h3>
+
+        <audio controls preload="metadata">
+
+          <source
+            src="song/Kabza De Small, DJ Maphorisa - Abalele (Lyrics) Feat. Ami Faku - (320 Kbps).mp3"
+            type="audio/mpeg"
+          >
+
+          Your browser does not support audio.
+
+        </audio>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* SHOW / HIDE PASSWORD */
+
+    const passwordInput =
+      document.getElementById('password');
+
+    const showPassword =
+      document.getElementById('show-password');
+
+    const gallery =
+      document.getElementById('memoryGallery');
+
+    const passwordSection =
+      document.getElementById('password-section');
+
+
+    showPassword.addEventListener('change', () => {
+
+      passwordInput.type =
+        showPassword.checked
+          ? 'text'
+          : 'password';
+
+    });
+
+
+    /* PASSWORD CHECK */
+
+    function checkPassword() {
+
+      if (passwordInput.value === 'mygirl4ever') {
+
+        passwordSection.style.display = 'none';
+
+        gallery.style.display = 'flex';
+
+        const children = [...gallery.children];
+
+        children.forEach((el, index) => {
+
+          el.style.animationDelay =
+            `${index * 0.15}s`;
+
+        });
+
+        setTimeout(() => {
+
+          gallery.style.opacity = '1';
+
+        }, 100);
+
+      } else {
+
+        alert('Incorrect password. Please try again.');
+
+      }
+
+    }
+
+
+    /* BACK TO LETTER PAGE */
+
+    function goBackWithFade() {
+
+      document.body.style.opacity = '0';
+
+      setTimeout(() => {
+
+        window.location.href = 'letter.html';
+
+      }, 500);
+
+    }
+
+
+    /* PAGE FADE IN */
+
+    window.onload = () => {
+
+      document.body.style.opacity = '0';
+
+      setTimeout(() => {
+
+        document.body.style.opacity = '1';
+
+      }, 50);
+
+    };
+
+  </script>
+
+</body>
+</html>

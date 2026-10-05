@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+
+  <title>A letter from my heart🫀</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #d8b4fe, #8b5cf6, #4c1d95);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+overflow-y: auto;
+      position: relative;
+      z-index: 0;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #f0abfc;
+      font-size: 3rem;
+      margin-top: 60px;
+      font-style: italic;
+      position: relative;
+      z-index: 10;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .message {
+      margin: 40px auto 20px;
+      max-width: 800px;
+      font-size: 1.5rem;
+      background: rgba(255, 255, 255, 0.96);
+      padding: 25px;
+      border-radius: 15px;
+      color: #7e22ce;
+      line-height: 1.6;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 8px 25px rgba(45, 20, 80, 0.25);
+    }
+
+    .highlight-pink {
+      color: #c026d3;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 20px 0 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      min-width: 150px;
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    .btn-back {
+      background: linear-gradient(to right, #c026d3, #7c3aed);
+    }
+
+    .btn-back:hover {
+      background: linear-gradient(to right, #a21caf, #6d28d9);
+      transform: scale(1.05);
+    }
+
+    .btn-memories {
+      background: linear-gradient(to right, #a855f7, #6d28d9);
+    }
+
+    .btn-memories:hover {
+      background: linear-gradient(to right, #9333ea, #581c87);
+      transform: scale(1.05);
+    }
+
+    .waving-teddy {
+      font-size: 3rem;
+      animation: wave 1s infinite;
+      margin: 40px 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes wave {
+      0%, 100% {
+        transform: rotate(0);
+      }
+
+      50% {
+        transform: rotate(15deg);
+      }
+    }
+
+    #floating-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+      user-select: none;
+    }
+
+    .floating {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.6;
+      will-change: transform, opacity;
+      user-select: none;
+      pointer-events: none;
+      filter: drop-shadow(0 0 6px rgba(192, 38, 211, 0.4));
+      transition: opacity 2s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>I Love You 💜</h1>
+
+  <div class="message">
+    <p>
+    
+Hey, Nonhla 🫶🫶,<br>
+
+<span class="highlight-pink">Sthandwa sami ❤️,</span><br>
+
+I just want you to know how much I appreciate you and how grateful I am to have you in my life.<br>
+
+<span class="highlight-pink">
+You are my calm, my peace, my happiness, and one of the most beautiful girls I know.
+</span><br>
+
+I love your smile, your heart, your personality, and all the little things that make you, you. Thank you for every laugh, every memory, and every moment we share. ❤️<br>
+
+<span class="highlight-pink">
+You mean more to me than words can explain.<br>
+NGISAKUTHANDA, NONHLAKANIPHO ❤️<br>
+NDOKUDA, NONHLAKANIPHO 💜<br>
+I LOVE YOU SO MUCH ❤️
+</span>
+</span>
+      </span>
+    </p>
+  </div>
+
+  <div class="buttons">
+
+    <button
+      class="btn btn-back"
+      onclick="window.location.href='nonhla.html'">
+      Go Back
+    </button>
+
+    <button
+      class="btn btn-memories"
+      onclick="window.location.href='memories.html'">
+      View Memories
+    </button>
+
+  </div>
+
+  <div class="waving-teddy">🧸</div>
+
+  <div id="floating-container"></div>
+
+  <script>
+    const container = document.getElementById("floating-container");
+
+    const symbols = [
+      '❤️',
+      '💜',
+      '💖',
+      '🧸',
+      'Nonhla',
+      '💗',
+      '💓',
+      '💞'
+    ];
+
+    const floaters = [];
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    class Floater {
+
+      constructor() {
+
+        this.el = document.createElement('div');
+
+        this.el.classList.add('floating');
+
+        this.el.textContent =
+          symbols[Math.floor(Math.random() * symbols.length)];
+
+        this.el.style.fontSize =
+          `${random(16, 40)}px`;
+
+        this.el.style.color =
+          [
+            '#e879f9',
+            '#c084fc',
+            '#a855f7',
+            '#f0abfc'
+          ][Math.floor(Math.random() * 4)];
+
+        container.appendChild(this.el);
+
+        this.x = random(0, window.innerWidth);
+        this.y = random(0, window.innerHeight);
+
+        this.vx = random(-0.5, 0.5);
+        this.vy = random(-0.3, -1);
+
+        this.opacity = random(0.6, 1);
+
+        this.el.style.opacity = this.opacity;
+
+        this.updatePosition();
+      }
+
+      updatePosition() {
+
+        this.el.style.transform =
+          `translate(${this.x}px, ${this.y}px)`;
+
+        this.el.style.opacity =
+          this.opacity;
+      }
+
+      move() {
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (
+          this.y < -50 ||
+          this.x < -50 ||
+          this.x > window.innerWidth + 50
+        ) {
+
+          this.x = random(0, window.innerWidth);
+
+          this.y = window.innerHeight + 50;
+
+          this.vx = random(-0.5, 0.5);
+
+          this.vy = random(-0.3, -1);
+
+          this.opacity = random(0.6, 1);
+
+          this.el.style.opacity =
+            this.opacity;
+        }
+
+        this.updatePosition();
+      }
+    }
+
+    for (let i = 0; i < 25; i++) {
+      floaters.push(new Floater());
+    }
+
+    function animate() {
+
+      floaters.forEach(
+        floater => floater.move()
+      );
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+
+      floaters.forEach(floater => {
+
+        floater.x =
+          Math.min(
+            floater.x,
+            window.innerWidth
+          );
+
+        floater.y =
+          Math.min(
+            floater.y,
+            window.innerHeight
+          );
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>
